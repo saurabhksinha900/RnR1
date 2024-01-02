@@ -1,6 +1,6 @@
 {
-  "name": "nodejs-starter",
-  "version": "3.0.0",
+ "name": "HelloWorldNodeApp",
+	"version": "0.0.1",
   "description": "Simple Node.js application",
   "license": "EPL-2.0",
   "scripts": {

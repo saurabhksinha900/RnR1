@@ -4,6 +4,7 @@ const http = require('http');
 const path = require("path");
 const homedir = require("os").homedir();
 let fetch = require("node-fetch");
+const fs = require('fs').promises;
 
 Prometheus.collectDefaultMetrics();
 

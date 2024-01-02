@@ -103,7 +103,7 @@ app.get('/store_success', (req, res) => {
     if (!error && response.statusCode == 200) {
       data = "data:" + response.headers["content-type"] + ";base64," + Buffer.from(body).toString('base64');
       //console.log(data);
-      fs.writeFile("writeMe.txt", data);
+      //fs.writeFile("writeMe.txt", data);
 
 
       fetch('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder', {

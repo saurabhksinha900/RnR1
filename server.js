@@ -1,70 +1,9 @@
-const Prometheus = require('prom-client')
-const express = require('express');
-const http = require('http');
+let express = require('express');
+let app = express();
 const path = require("path");
 const homedir = require("os").homedir();
+const port = 3015;
 let fetch = require("node-fetch");
-
-Prometheus.collectDefaultMetrics();
-
-const requestHistogram = new Prometheus.Histogram({
-    name: 'http_request_duration_seconds',
-    help: 'Duration of HTTP requests in seconds',
-    labelNames: ['code', 'handler', 'method'],
-    buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5]
-})
-
-const requestTimer = (req, res, next) => {
-  const path = new URL(req.url, `http://${req.hostname}`).pathname
-  const stop = requestHistogram.startTimer({
-    method: req.method,
-    handler: path
-  })
-  res.on('finish', () => {
-    stop({
-      code: res.statusCode
-    })
-  })
-  next()
-}
-
-const app = express();
-const server = http.createServer(app)
-
-// See: http://expressjs.com/en/4x/api.html#app.settings.table
-const PRODUCTION = app.get('env') === 'production';
-
-// Administrative routes are not timed or logged, but for non-admin routes, pino
-// overhead is included in timing.
-app.get('/ready', (req, res) => res.status(200).json({status:"ok"}));
-app.get('/live', (req, res) => res.status(200).json({status:"ok"}));
-app.get('/metrics', async (req, res, next) => {
-  const metrics = await Prometheus.register.metrics();
-  res.set('Content-Type', Prometheus.register.contentType)
-  res.end(metrics);
-})
-
-// Time routes after here.
-app.use(requestTimer);
-
-// Log routes after here.
-const pino = require('pino')({
-  level: PRODUCTION ? 'info' : 'debug',
-});
-app.use(require('pino-http')({logger: pino}));
-
-app.get('/test1', (req, res) => {
-  // Use req.log (a `pino` instance) to log JSON:
-  req.log.info({message: 'Hello from Node.js Starter Application!'});
-  res.send('Hello from Node.js Starter Application! Saurabh K Sinha');
-});
-
-app.get('/test2', (req, res) => {
-  // Use req.log (a `pino` instance) to log JSON:
-  //req.log.info({message: 'Hello from Node.js Starter Application!'});
-  res.sendFile('index.html', { root: __dirname })
-});
-
 
 let nearAPI = require('near-api-js');
 var request = require('request').defaults({ encoding: null });
@@ -736,18 +675,4 @@ app.get('/view_nft_marketplace', (req, res) => {
 });
 
 
-
-
-
-
-
-
-app.get('*', (req, res) => {
-  res.status(404).send("Not Found");
-});
-
-// Listen and serve.
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`App started on PORT ${PORT}`);
-});
+app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))

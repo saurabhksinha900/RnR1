@@ -3,7 +3,7 @@ const express = require('express');
 const http = require('http');
 const path = require("path");
 const homedir = require("os").homedir();
-
+let fetch = require("node-fetch");
 
 Prometheus.collectDefaultMetrics();
 

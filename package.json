@@ -15,6 +15,9 @@
     "prom-client": "^14.1.0",
     "node-fetch": "^2.6.7",
     "fs": "^0.0.1-security",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "body-parser": "~1.13.2",
+		"cf-deployment-tracker-client": "^0.0.8",
+		"cfenv": "1.2.x"
   }
 }

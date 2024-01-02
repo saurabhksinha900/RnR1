@@ -63,13 +63,7 @@ app.get('/test2', (req, res) => {
 });
 
 
-const path = require("path");
-const homedir = require("os").homedir();
-const port = 3015;
-let fetch = require("node-fetch");
 
-let nearAPI = require('near-api-js');
-var request = require('request').defaults({ encoding: null });
 
 
 

@@ -60,7 +60,7 @@ app.get('/test1', (req, res) => {
   res.send('Hello from Node.js Starter Application! Saurabh K Sinha');
 });
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   // Use req.log (a `pino` instance) to log JSON:
   //req.log.info({message: 'Hello from Node.js Starter Application!'});
   res.sendFile('index.html', { root: __dirname })
@@ -68,7 +68,7 @@ app.get('/home', (req, res) => {
 
 
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
 
   var options = {
     "method": "GET"

@@ -159,7 +159,7 @@ app.get('/nft_mint_success', (req, res) => {
   var request = require('request');
 
   var options = {
-    url: 'https://miserabletimelyquery.saurabhksinha90.repl.co/mint_nft?token_id=' + token_id + '&receiver_id=' + receiver_id + '&description=' + description + '&media=' + media.replace("?", "%3F").replace(/[&]/g, "%26") + '&contract=' + contract + '&account_id=' + account_id + '&seedphrase=' + seed_phrase + '&title=' + metadata_title
+    url: 'https://3.91.12.12/mint_nft?token_id=' + token_id + '&receiver_id=' + receiver_id + '&description=' + description + '&media=' + media.replace("?", "%3F").replace(/[&]/g, "%26") + '&contract=' + contract + '&account_id=' + account_id + '&seedphrase=' + seed_phrase + '&title=' + metadata_title
   };
 
   function callback(error, response, body) {
